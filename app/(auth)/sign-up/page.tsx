@@ -1,8 +1,9 @@
 "use client";
 
-import AuthForm from "@/components/AuthForm";
-import { signUpSchema } from "@/lib/validations";
 import { University } from "lucide-react";
+
+import { signUpSchema } from "@/lib/validations";
+import AuthForm from "@/components/AuthForm";
 
 const page = () => (
   <AuthForm

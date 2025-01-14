@@ -1,8 +1,10 @@
 "use client";
-import { cn } from "@/lib/utils";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const pathName = usePathname();
@@ -16,7 +18,7 @@ const Header = () => {
           <Link
             className={cn(
               "text-base cursor-pointer capitalize",
-              pathName == "/library" ? "text-light-200" : "text-light-100"
+              pathName == "/library" ? "text-light-200" : "text-light-100",
             )}
             href="/library"
           >

@@ -1,7 +1,9 @@
-import Link from "next/link";
-import BookCover from "./BookCover";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
+
+import { cn } from "@/lib/utils";
+
+import BookCover from "./BookCover";
 import { Button } from "./ui/button";
 
 const BookCard = ({

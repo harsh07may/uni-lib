@@ -1,5 +1,7 @@
-import { cn } from "@/lib/utils";
 import Image from "next/image";
+
+import { cn } from "@/lib/utils";
+
 import BookCoverSvg from "./BookCoverSvg";
 
 type BookCoverVariant = "extraSmall" | "small" | "medium" | "regular" | "wide";
@@ -29,7 +31,7 @@ const BookCover = ({
       className={cn(
         "relative transition-all duration-300",
         variantStyles[variant],
-        className
+        className,
       )}
     >
       <BookCoverSvg coverColor={coverColor} />

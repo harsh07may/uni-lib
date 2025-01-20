@@ -2,6 +2,7 @@
 
 import { University } from "lucide-react";
 
+import { signUp } from "@/lib/actions";
 import { signUpSchema } from "@/lib/validations";
 import AuthForm from "@/components/AuthForm";
 
@@ -13,10 +14,10 @@ const page = () => (
       email: "",
       password: "",
       fullName: "",
-      universityId: 0,
+      universityID: 0,
       universityCard: "",
     }}
-    onSubmit={() => {}}
+    onSubmit={signUp}
   />
 );
 export default page;

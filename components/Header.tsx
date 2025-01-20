@@ -4,12 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { cn } from "@/lib/utils";
+import { Session } from "next-auth";
 
-const Header = () => {
+import { cn, getInitials } from "@/lib/utils";
+
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+
+const Header = ({ session }: { session: Session }) => {
   const pathName = usePathname();
   return (
-    <div className="my-10 flex justify-between gap-5">
+    <header className="my-10 flex justify-between gap-5">
       <Link href="/">
         <Image src="/icons/logo.svg" alt="logo" width={40} height={40} />
       </Link>
@@ -26,8 +30,16 @@ const Header = () => {
           </Link>
         </li>
       </ul>
-      Header
-    </div>
+      <li>
+        <Link href="/my-profile">
+          <Avatar>
+            <AvatarFallback className="text-white bg-cyan-900 border-2 border-white ">
+              {getInitials(session?.user?.name || "IN")}
+            </AvatarFallback>
+          </Avatar>
+        </Link>
+      </li>
+    </header>
   );
 };
 export default Header;

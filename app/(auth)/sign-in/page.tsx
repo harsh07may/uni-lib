@@ -1,5 +1,6 @@
 "use client";
 
+import { signInWithCredentials } from "@/lib/actions";
 import { signInSchema } from "@/lib/validations";
 import AuthForm from "@/components/AuthForm";
 
@@ -11,7 +12,7 @@ const page = () => (
       email: "",
       password: "",
     }}
-    onSubmit={() => {}}
+    onSubmit={signInWithCredentials}
   />
 );
 export default page;

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +13,7 @@ import {
   useForm,
   UseFormReturn,
 } from "react-hook-form";
+import { toast } from "sonner";
 import { z, ZodType } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -41,6 +43,8 @@ const AuthForm = <T extends FieldValues>({
   defaultValues,
   onSubmit,
 }: Props<T>) => {
+  const router = useRouter();
+
   const isSignIn = type === "SIGN_IN";
 
   const form: UseFormReturn<T> = useForm({
@@ -48,7 +52,25 @@ const AuthForm = <T extends FieldValues>({
     defaultValues: defaultValues as DefaultValues<T>,
   });
 
-  const handleSubmit: SubmitHandler<T> = async (data) => {};
+  const handleSubmit: SubmitHandler<T> = async (data) => {
+    const result = await onSubmit(data);
+    if (result.success) {
+      console.log("SUCCESS");
+      toast.success("Success!", {
+        description: isSignIn
+          ? "Successfully signed In"
+          : "Successfully signed up",
+      });
+      router.push("/");
+    } else {
+      toast.error(
+        `An error occured while ${isSignIn ? "Signing in" : "Signing up"}`,
+        {
+          description: result.error ?? "An Error occured",
+        },
+      );
+    }
+  };
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-semibold text-white">

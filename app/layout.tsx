@@ -5,6 +5,9 @@ import "./globals.css";
 import { ReactNode } from "react";
 import localFont from "next/font/local";
 
+import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
+
 import { Toaster } from "@/components/ui/sonner";
 
 // prettier-ignore
@@ -29,15 +32,18 @@ export const metadata: Metadata = {
   description: "BookWise is a library management platform.",
 };
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
+const RootLayout = async ({ children }: { children: ReactNode }) => {
+  const session = await auth();
   return (
     <html lang="en">
-      <body
-        className={`${ibmPlexSans.className} ${BebasNeueRegular.variable} antialiased`}
-      >
-        {children}
-        <Toaster />
-      </body>
+      <SessionProvider session={session}>
+        <body
+          className={`${ibmPlexSans.className} ${BebasNeueRegular.variable} antialiased`}
+        >
+          {children}
+          <Toaster />
+        </body>
+      </SessionProvider>
     </html>
   );
 };

@@ -2,7 +2,7 @@
 
 import { University } from "lucide-react";
 
-import { signUp } from "@/lib/actions";
+import { signUp } from "@/lib/actions/auth";
 import { signUpSchema } from "@/lib/validations";
 import AuthForm from "@/components/AuthForm";
 

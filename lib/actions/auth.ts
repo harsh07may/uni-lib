@@ -9,7 +9,9 @@ import { users } from "@/database/schema";
 import { hash } from "bcryptjs";
 import { eq } from "drizzle-orm";
 
-import ratelimit from "./ratelimit";
+import config from "../config";
+import ratelimit from "../ratelimit";
+import { workflowClient } from "../workflow";
 
 export const signInWithCredentials = async (
   //* LEARNING: Typescript Omit/Pick
@@ -65,6 +67,16 @@ export const signUp = async (params: AuthCredentials) => {
       password: hashedPassword,
       universityCard,
     });
+
+    // Trigger Qstash workflow
+    await workflowClient.trigger({
+      url: `${config.env.prodApiEndpoint}/api/workflow/onboarding`,
+      body: {
+        email,
+        fullName,
+      },
+    });
+
     //Sign-in User
     await signInWithCredentials({ email, password });
     return { success: true, message: "User created successfully" };

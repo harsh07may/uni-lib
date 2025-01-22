@@ -1,16 +1,17 @@
-import config from "@/lib/config";
-import ImageKit from "imagekit";
 import { NextResponse } from "next/server";
 
-const { privateKey, publicKey, urlEndpoint } = config.env.imagekit;
+import ImageKit from "imagekit";
 
-const imagekit = new ImageKit({
-    publicKey,
-    privateKey,
-    urlEndpoint,
-  });
+import config from "@/lib/config";
 
-  export async function GET() {
-    return NextResponse.json(imagekit.getAuthenticationParameters());
-  }
-  
+const {
+  env: {
+    imagekit: { publicKey, privateKey, urlEndpoint },
+  },
+} = config;
+
+const imagekit = new ImageKit({ publicKey, privateKey, urlEndpoint });
+
+export async function GET() {
+  return NextResponse.json(imagekit.getAuthenticationParameters());
+}

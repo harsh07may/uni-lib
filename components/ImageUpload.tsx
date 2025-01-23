@@ -18,7 +18,11 @@ import { Button } from "./ui/button";
 const { publicKey, urlEndpoint } = config.env.imagekit;
 const authenticator = async () => {
   try {
-    // const apiEndpoint = process.env.NODE_ENV == "production" ? config.env.prodApiEndpoint : config.env.apiEndpoint;
+    console.log(`${config.env.prodApiEndpoint}/api/auth/imagekit`);
+    const apiEndpoint =
+      process.env.NODE_ENV == "production"
+        ? config.env.prodApiEndpoint
+        : config.env.apiEndpoint;
     const response = await fetch(
       `${config.env.prodApiEndpoint}/api/auth/imagekit`,
     );

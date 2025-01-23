@@ -8,7 +8,6 @@ import { signUpSchema } from "@/lib/validations";
 import AuthForm from "@/components/AuthForm";
 
 const page = () => {
-  console.log(`${config.env.apiEndpoint}/api/auth/imagekit`);
   return (
     <AuthForm
       type="SIGN_UP"
